@@ -11,6 +11,10 @@ public class Movimientos {
     this.movimientos = new ArrayList<>(movimientos);
   }
 
+  public void add(Movimiento movimiento) {
+    movimientos.add(movimiento);
+  }
+
   public double getMontoExtraidoA(LocalDate fecha) {
     return movimientos.stream()
         .filter(movimiento -> movimiento.fueExtraidoEn(fecha))
