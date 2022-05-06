@@ -42,10 +42,6 @@ public class Movimiento {
   }
 
   public double calcularValor(Cuenta cuenta) {
-    if (isDeposito()) {
-      return cuenta.getSaldo() + getMonto();
-    } else {
-      return cuenta.getSaldo() - getMonto();
-    }
+    return tipo.montoNuevo(cuenta.getSaldo(), getMonto());
   }
 }
