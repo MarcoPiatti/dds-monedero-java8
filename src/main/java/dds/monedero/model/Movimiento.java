@@ -36,6 +36,14 @@ public class Movimiento {
     return tipo == TipoDeMovimiento.EXTRACCION;
   }
 
+  public boolean fueDepositadoEn(LocalDate fecha) {
+    return isDeposito() && esDeLaFecha(fecha);
+  }
+
+  public boolean fueExtraidoEn(LocalDate fecha) {
+    return isExtraccion() && esDeLaFecha(fecha);
+  }
+
   public double calcularValor(double saldo) {
     return tipo.montoNuevo(saldo, monto);
   }

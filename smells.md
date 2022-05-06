@@ -15,8 +15,6 @@ Una mejor solucion es delegar la implementacion en una interfaz compuesta por Mo
 Esto se podria lograr aun mas simplemente con un enum
 que lleve comportamiento.
 
-- Metodos no usados como fueExtraido o fueDepositado
-
 Cuenta:
 
 - multiples constructores, hacer uno solo
