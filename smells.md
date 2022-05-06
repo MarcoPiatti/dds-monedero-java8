@@ -28,6 +28,8 @@ Movimientos por separado.
 
 - el saldo no deberia tener setters.
 
+- setMovimientos no sirve
+
 - agregarMovimiento() es basicamente un constructor que
 - es llamado medio ciclicamente desde movimiento 
 
