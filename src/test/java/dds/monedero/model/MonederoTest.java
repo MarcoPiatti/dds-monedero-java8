@@ -8,34 +8,38 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static java.util.Collections.emptyList;
 
 public class MonederoTest {
   private Cuenta cuenta;
 
   @BeforeEach
-  void init() {
-    cuenta = new Cuenta();
+  public void setUp() {
+    cuenta = cuentaSinPlata();
   }
 
   @Test
-  void Poner() {
+  void sePuedePonerDinero() {
     cuenta.poner(1500);
+    assertEquals(1500.0, cuenta.getSaldo());
   }
 
   @Test
-  void PonerMontoNegativo() {
+  void noSePuedePonerUnMontoNegativo() {
     assertThrows(MontoNegativoException.class, () -> cuenta.poner(-1500));
   }
 
   @Test
-  void TresDepositos() {
+  void sePuedenHacerTresDepositos() {
     cuenta.poner(1500);
     cuenta.poner(456);
     cuenta.poner(1900);
+    assertEquals(1500+456+1900, cuenta.getSaldo());
   }
 
   @Test
-  void MasDeTresDepositos() {
+  void noSePuedeHacerMasDeTresDepositosDiarios() {
     assertThrows(MaximaCantidadDepositosException.class, () -> {
           cuenta.poner(1500);
           cuenta.poner(456);
@@ -45,24 +49,29 @@ public class MonederoTest {
   }
 
   @Test
-  void ExtraerMasQueElSaldo() {
-    assertThrows(SaldoMenorException.class, () -> {
-          cuenta.setSaldo(90);
-          cuenta.sacar(1001);
-    });
+  void noSePuedeExtraerMasQueElSaldo() {
+    assertThrows(SaldoMenorException.class, () -> cuentaCon90Pesos().sacar(1001));
   }
 
   @Test
-  public void ExtraerMasDe1000() {
-    assertThrows(MaximoExtraccionDiarioException.class, () -> {
-      cuenta.setSaldo(5000);
-      cuenta.sacar(1001);
-    });
+  public void noSePuedeExtraerMasDe1000() {
+    assertThrows(MaximoExtraccionDiarioException.class, () -> cuentaCon5Lucas().sacar(1001));
   }
 
   @Test
-  public void ExtraerMontoNegativo() {
-    assertThrows(MontoNegativoException.class, () -> cuenta.sacar(-500));
+  public void noSePuedeExtraerUnMontoNegativo() {
+    assertThrows(MontoNegativoException.class, () -> cuentaSinPlata().sacar(-500));
   }
 
+  private Cuenta cuentaCon5Lucas(){
+    return new Cuenta(5000, new Movimientos(emptyList()));
+  }
+
+  private Cuenta cuentaCon90Pesos(){
+    return new Cuenta(90, new Movimientos(emptyList()));
+  }
+
+  private Cuenta cuentaSinPlata(){
+    return new Cuenta(0, new Movimientos(emptyList()));
+  }
 }
