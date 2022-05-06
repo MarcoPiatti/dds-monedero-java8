@@ -36,7 +36,7 @@ public class Cuenta {
     }
 
     Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, TipoDeMovimiento.EXTRACCION); 
-    setSaldo(movimiento.calcularValor(getSaldo()));
+    saldo = movimiento.calcularValor(saldo);
     agregarMovimiento(movimiento);
   }
 
@@ -44,8 +44,8 @@ public class Cuenta {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
-    if (getSaldo() - cuanto < 0) {
-      throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
+    if (saldo - cuanto < 0) {
+      throw new SaldoMenorException("No puede sacar mas de " + saldo + " $");
     }
     double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
     double limite = 1000 - montoExtraidoHoy;
@@ -55,7 +55,7 @@ public class Cuenta {
     }
     
     Movimiento movimiento = new Movimiento(LocalDate.now(), cuanto, TipoDeMovimiento.EXTRACCION); 
-    setSaldo(movimiento.calcularValor(getSaldo()));
+    saldo = movimiento.calcularValor(saldo);
     agregarMovimiento(movimiento);
   }
 
@@ -73,13 +73,4 @@ public class Cuenta {
   public List<Movimiento> getMovimientos() {
     return movimientos;
   }
-
-  public double getSaldo() {
-    return saldo;
-  }
-
-  public void setSaldo(double saldo) {
-    this.saldo = saldo;
-  }
-
 }
