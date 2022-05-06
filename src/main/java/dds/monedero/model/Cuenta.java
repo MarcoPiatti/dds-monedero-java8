@@ -30,7 +30,7 @@ public class Cuenta {
     if (movimientos.cantidadDeDepositosEn(LocalDate.now()) >= 3) {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
-    acreditarOperacion(monto, TipoDeMovimiento.EXTRACCION);
+    acreditarOperacion(monto, TipoDeMovimiento.DEPOSITO);
   }
 
   public void sacar(double monto) {
@@ -44,5 +44,9 @@ public class Cuenta {
           + " diarios, límite: " + limite);
     }
     acreditarOperacion(monto, TipoDeMovimiento.EXTRACCION);
+  }
+
+  public double getSaldo() {
+      return saldo;
   }
 }
