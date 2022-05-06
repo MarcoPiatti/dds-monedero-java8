@@ -37,11 +37,11 @@ public class Movimiento {
   }
 
   public void agregateA(Cuenta cuenta) {
-    cuenta.setSaldo(calcularValor(cuenta));
+    cuenta.setSaldo(calcularValor(cuenta.getSaldo()));
     cuenta.agregarMovimiento(fecha, monto, tipo);
   }
 
-  public double calcularValor(Cuenta cuenta) {
-    return tipo.montoNuevo(cuenta.getSaldo(), getMonto());
+  public double calcularValor(double saldo) {
+    return tipo.montoNuevo(saldo, getMonto());
   }
 }
