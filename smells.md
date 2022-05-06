@@ -30,6 +30,9 @@ Movimientos por separado.
 
 - el saldo no deberia tener setters.
 
+- agregarMovimiento() es basicamente un constructor que
+- es llamado medio ciclicamente desde movimiento 
+
 Tests: 
 
 - Poner() no testea nada

@@ -36,11 +36,6 @@ public class Movimiento {
     return tipo == TipoDeMovimiento.EXTRACCION;
   }
 
-  public void agregateA(Cuenta cuenta) {
-    cuenta.setSaldo(calcularValor(cuenta.getSaldo()));
-    cuenta.agregarMovimiento(fecha, monto, tipo);
-  }
-
   public double calcularValor(double saldo) {
     return tipo.montoNuevo(saldo, getMonto());
   }
