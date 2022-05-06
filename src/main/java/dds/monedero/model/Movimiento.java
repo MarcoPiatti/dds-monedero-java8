@@ -37,6 +37,6 @@ public class Movimiento {
   }
 
   public double calcularValor(double saldo) {
-    return tipo.montoNuevo(saldo, getMonto());
+    return tipo.montoNuevo(saldo, monto);
   }
 }
